@@ -1,0 +1,61 @@
+body{
+    background-color: beige;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.CalculatorBox, .buttonScreen{
+    border-radius: 5px;
+    border: black solid 2px; 
+
+}
+.CalculatorBox{  
+    background-color: rgb(122, 108, 166);
+    width: 550px;
+    height: 600px;
+}
+.buttonScreen{
+    background-color: white;
+    height: 15%;
+    margin: 3%;
+}
+
+h1{
+    font-size: 90px;
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 10px;
+    margin: auto;   
+}
+
+#button-container{
+    display: flex;
+    flex-wrap:wrap;
+    width: auto;
+    margin: 3%;
+    gap: 5px;  
+    height: 200px;
+}
+
+.NumberButtons{
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    height: 87px;
+    width: calc((100% / 4) - 5px); /* Adjust the width of each button */
+    font-size: 50px;
+}
+
+.button-0{
+    width: 49%;
+}
+.button-AC, .button-DEL{
+    background-color: red;
+}
+
+.modulusButton{
+    background-color: grey;
+}
