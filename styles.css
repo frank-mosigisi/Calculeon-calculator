@@ -24,7 +24,7 @@ body{
 }
 
 h1{
-    font-size: 90px;
+    font-size: 80px;
     display: flex;
     justify-content: flex-end;
     padding-left: 10px;
@@ -40,7 +40,7 @@ h1{
     height: 200px;
 }
 
-.NumberButtons{
+.AllButtons{
     background-color: black;
     border-radius: 10px;
     color: white;
@@ -52,10 +52,11 @@ h1{
 .button-0{
     width: 49%;
 }
-.button-AC, .button-DEL{
-    background-color: red;
+
+.operators{
+    background-color: grey;
 }
 
-.modulusButton{
-    background-color: grey;
+.button-AC, .button-DEL{
+    background-color: red;
 }
