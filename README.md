@@ -12,15 +12,15 @@ To get started with the calculator, simply open the `index.html` file in a web b
 
 The calculator supports the following basic operations:
 
-- Addition: Use the "+" button or the "+" key on the keyboard.
-- Subtraction: Use the "-" button or the "-" key on the keyboard.
-- Multiplication: Use the "x" button or the "*" key on the keyboard.
-- Division: Use the "÷" button or the "/" key on the keyboard.
-- Modulus: Use the "%" button or the "%" key on the keyboard.
+- Addition: Use the "+" button.
+- Subtraction: Use the "-" button.
+- Multiplication: Use the "x" button.
+- Division: Use the "÷" button.
+- Modulus: Use the "%" button.
 
 ### Inputting Numbers
 
-To input numbers into the calculator, use the number buttons (0-9) on the calculator UI or the corresponding keys on the keyboard. You can input decimal numbers by using the "." button or the "." key on the keyboard.
+To input numbers into the calculator, use the number buttons (0-9) on the calculator UI. You can input decimal numbers by using the "." button.
 
 ### Clearing and Deleting
 
@@ -29,7 +29,7 @@ To input numbers into the calculator, use the number buttons (0-9) on the calcul
 
 ### Calculating the Result
 
-To calculate the result, press the "=" button or the "=" key on the keyboard. The result will be displayed on the calculator screen.
+To calculate the result, press the "=" button. The result will be displayed on the calculator screen.
 
 ## Error Handling
 
