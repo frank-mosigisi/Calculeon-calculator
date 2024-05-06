@@ -1,3 +1,4 @@
+//arithmetic functions
 function add (a,b){
     return a + b
 }
@@ -11,8 +12,9 @@ function multiplication (a,b){
 }
 
 function division (a,b){
-    if (b==0){
-        return "Don't do that"
+    if (b===0){
+        throw new Error("Lmao! cant ÷ by 0");
+
     }
     return a / b
 }
@@ -21,12 +23,10 @@ function modulus (a,b){
     return a % b
 }
 
-
-// console.log(add(2,3))
-
-let numberOne
-let numberTwo
-let operator
+//operation function
+let numberOne;
+let numberTwo;
+let operator;
 
 function operate (numberOne, operator, numberTwo){
 
@@ -50,10 +50,8 @@ function operate (numberOne, operator, numberTwo){
             return 'Invalid operator';
     }
 }
-// console.log(operate(1,'+',2))
 
-//buttons creation
-
+//buttons creation section
 function createButton( id, text){
     let button = document.createElement("button")
     button.textContent= text
@@ -61,6 +59,7 @@ function createButton( id, text){
     return button
 }
 
+//button adding section
 function addButtons() {
 
     let buttonOrder = ['AC','DEL','%',"÷",7,8,9,"x",4,5,6,"-",1,2,3,"+",0,".","="]
@@ -86,127 +85,142 @@ function addButtons() {
 addButtons()
 
 
+//screen is populated and calculation occurs
 
-let storedValueOne = ""
-let operatorz = ""
-let storedValueTwo = ""
-let answer = ""
+let storedValueOne = "";
+let operatorz = "";
+let storedValueTwo = "";
+let answer = "";
 let buttonScreen = document.querySelector(".buttonScreen h1");
 
-function populateDisplay() {
+function populateAndCalculate() {
     let allButtons = document.querySelectorAll("#button-container button");
 
     allButtons.forEach(function (button) {
       button.addEventListener("click", function () {
 
         let buttonValue = button.textContent
-
+        
+        //operators section
         if (['%', '÷', 'x', '-', '+'].includes(buttonValue)) {
-            if (storedValueOne !== "" && operatorz !== "" && storedValueTwo !== ""){
-                computeTotal()
-                storedValueOne = answer
-                operatorz = buttonValue
-                console.log('operator cought01', operatorz)
-            } else {
-            operatorz = buttonValue
-            console.log('operator cought', operatorz)
-            buttonScreen.textContent = ''
-          } }
+            if (storedValueOne === '' && buttonValue === '-' & answer === '') {
+              storedValueOne = '-';
+              buttonScreen.textContent = storedValueOne;
+            } 
+            else if(['%', '÷', 'x', '+'].includes(buttonValue) && storedValueOne === '' && answer ===''){
+                operatorz = '';
+            }
+            //2+3+4+6 does 2 + 3 then press + does calc before proceeding to next
+            else if (storedValueOne !== '' && operatorz !== '' && storedValueTwo !== '') {
+              computeTotal();
+              storedValueOne = answer;
+              operatorz = buttonValue;
+            //if answer = 5 when press operator like + stores ans=value1 and proceeds with calc
+            } else if (answer !==''){
+                storedValueOne = answer;
+                answer =''
+                operatorz = buttonValue;
+                buttonScreen.textContent = '';
 
-          else if (buttonValue=== 'AC'){
-            clearEverything()   
+            }else {
+              operatorz = buttonValue;
+              buttonScreen.textContent = '';
+            }
+        }
+            // clears everything at once
+        else if (buttonValue=== 'AC'){
+            clearEverything()  
+            answer ='' 
             buttonScreen.textContent = 0 
         }
 
-           else if (buttonValue === 'DEL') {
-                if (storedValueTwo !== "") {
-                  storedValueTwo = String(storedValueTwo).slice(0, -1);
-                  buttonScreen.textContent = storedValueTwo
-                  console.log('Deleted from storedValueTwo:', storedValueTwo);
-                } else if (operatorz !== "") {
-                  operatorz = "";
-                  console.log('Deleted the operator');
-                } else if (storedValueOne !== "") {
-                    storedValueOne = String(storedValueOne).slice(0, -1);
-                  buttonScreen.textContent = storedValueOne
-                  console.log('Deleted from storedValueOne:', storedValueOne);
-                }  
-                else if (answer !== "") {
-                    answer = String(answer).slice(0, -1);
-                    buttonScreen.textContent = answer
-                    console.log('Deleted answer:', answer);
-                    buttonScreen.textContent = 0
-                    
-                }
-
-                else if (storedValueOne === "") {
-                    buttonScreen.textContent = 0
-                    console.log('storedValueOne is empty:', storedValueOne);
-            }}
-
-            else if(answer !== '' && buttonValue !== '='){
-
-            if (buttonValue ==='.' && storedValueTwo.includes('.')){
-                return storedValueTwo;
+         // checks for different values & clears them one by one
+        else if (buttonValue === 'DEL') {
+            if (answer !==""){
+                answer = String(answer).slice(0, -1);
+                buttonScreen.textContent = 0
             }
-                storedValueOne = answer
-                answer = ''
-                storedValueTwo += buttonValue;
-                storedValueTwo = truncateValue(storedValueTwo, 11)
-                buttonScreen.textContent = storedValueTwo;
-
-               }
-            
-          else if (operatorz === '' && buttonValue !== '=') {
-                
-            //check decimal value if it exists
+            else if (storedValueTwo !== "") {
+                storedValueTwo = String(storedValueTwo).slice(0, -1);
+                buttonScreen.textContent = storedValueTwo
+            } else if (operatorz !== "") {
+                operatorz = "";
+            } else if (storedValueOne !== "") {
+                storedValueOne = String(storedValueOne).slice(0, -1);
+                buttonScreen.textContent = storedValueOne
+                buttonScreen.textContent = 0
+            } else {
+                return 'Error Encountered'
+            }
+        }
+               
+            //operations for valueOne
+        else if (operatorz === '' && buttonValue !== '=') {
+                //check decimal value if it exists
             if (buttonValue ==='.' && storedValueOne.includes('.')){
                 return storedValueOne;
             }
 
-        answer = ""
-        storedValueOne += buttonValue
-        storedValueOne = truncateValue(storedValueOne,11)
-        buttonScreen.textContent = storedValueOne
-        console.log('the number caught', storedValueOne)
-        
-       }  else if (operatorz !== ''&& buttonValue !== '=') {
+            answer = ''
+            storedValueOne += buttonValue
+            storedValueOne = truncateValue(storedValueOne,14)
+            buttonScreen.textContent = storedValueOne
+            console.log('met 1st number', storedValueOne)
+                
+        }  
+       
+            //operations for value two
+        else if (operatorz !== '' && buttonValue !== '=') {
 
-        //check decimal value if it exists
-        if (buttonValue ==='.' && storedValueTwo.includes('.')){
-            return storedValueTwo;
+            //check decimal value if it exists
+            if (buttonValue ==='.' && storedValueTwo.includes('.')){
+                return storedValueTwo;
+            }
+            answer = ''
+            storedValueTwo += buttonValue
+            storedValueTwo = truncateValue(storedValueTwo, 14)
+            buttonScreen.textContent = storedValueTwo
+            console.log('met 2nd number', storedValueTwo) 
         }
-        answer = ''
-        storedValueTwo += buttonValue
-        storedValueTwo = truncateValue(storedValueTwo, 11)
-        buttonScreen.textContent = storedValueTwo
-        console.log('the number caught2', storedValueTwo)
         
-       }
-       else if(buttonValue === '='){
-     if (storedValueOne === "" || operatorz === "" || storedValueTwo === ""){ 
-        return false
-     } else {
-        computeTotal()
-     }
-       } 
-       else //better check over here
-        {console.log('rara')}
+        //operations for equal sign
+        else if(buttonValue === '='){
+            if (storedValueOne === "" || operatorz === "" || storedValueTwo === ""){ 
+                return false
+            } else {
+                computeTotal()
+            }
+        }
+
+        else {
+            return 'Error encountered'
+        }
 
       });
     });
 }
-populateDisplay();
+populateAndCalculate();           
 
-
-function computeTotal(){
-    numberOne = parseFloat(storedValueOne); // Convert to number
-    numberTwo = parseFloat(storedValueTwo); // Convert to number
-    answer = operate(numberOne,operatorz,numberTwo)
-    buttonScreen.textContent = answer
-    clearEverything()
+function computeTotal() {
+    numberOne = parseFloat(storedValueOne);
+    numberTwo = parseFloat(storedValueTwo);
+  
+    try {
+      answer = operate(numberOne, operatorz, numberTwo);
+      answer = answer.toString();
+  
+      if (answer.length >= 10) {
+        answer = parseFloat(answer);
+        answer = answer.toExponential(10);
+      }
+  
+      buttonScreen.textContent = answer;
+      clearEverything();
+    } catch (error) {
+      buttonScreen.textContent = error.message;
+      clearEverything();
     }
-
+  }
 
 function clearEverything(){
     storedValueOne = ""

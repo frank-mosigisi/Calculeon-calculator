@@ -24,11 +24,11 @@ body{
 }
 
 h1{
-    font-size: 80px;
+    font-size: 60px;
     display: flex;
     justify-content: flex-end;
     padding-left: 10px;
-    margin: auto;   
+    margin-top: 2.5%;   
 }
 
 #button-container{
